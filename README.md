@@ -1,7 +1,7 @@
 
 ## chat-logger
 
-![alt text](https://i.imgur.com/T2ymInu.png)
+![alt text](https://i.imgur.com/E4cDV9d.png)
 
     git clone https://github.com/SoMuchForSubtlety/chat-logger/
     cd chat-logger
