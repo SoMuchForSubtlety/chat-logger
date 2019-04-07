@@ -1,4 +1,8 @@
 {
-    "websocket_host": "destiy.gg",
-	"websocket_path": "/ws"
+    "hosts":[
+        {
+            "websocket_host": "test.com",
+            "websocket_path": "/ws"
+        }
+    ]
 }
