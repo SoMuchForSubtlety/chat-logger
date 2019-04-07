@@ -11,7 +11,7 @@ func setSliceDimensions(input []float64, x int, y int) []float64 {
 		return input
 	}
 	input = sliceScaler(input, x)
-	input = squash(input, y, x)
+	input = squash(input, y)
 	return input
 }
 
@@ -76,7 +76,7 @@ func normalise(input []float64) []float64 {
 func autoSquash(input []float64, xSize int) []float64 {
 	factor := autoSquashHeight(input, xSize)
 	if factor > 0 {
-		return squash(input, factor, xSize)
+		return squash(input, factor)
 
 	}
 	return input
@@ -111,7 +111,7 @@ func autoSquashHeight(input []float64, xSize int) int {
 }
 
 //squashes slice on y dimension to specified value (can end up slimmer)
-func squash(input []float64, targetsize int, xSize int) []float64 {
+func squash(input []float64, targetsize int) []float64 {
 	tmp := make([]float64, len(input))
 	copy(tmp, input)
 	if len(tmp) < 1 {

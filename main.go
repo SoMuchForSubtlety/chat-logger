@@ -125,7 +125,7 @@ func main() {
 		go monitorMpm(15, &meme, dataChan)
 	}
 	text := "waiting for messages"
-	content := []float64{0.00001}
+	content := []float64{1}
 	//manage ws output
 	for {
 		select {
@@ -135,7 +135,7 @@ func main() {
 			text = ""
 			text += meme.h.WebsocketHost + "\n"
 			text += "===========================\n\n"
-			text += "messages received:  " + strconv.Itoa(meme.count) + "\n"
+			text += "messages received:  " + floatToString(meme.count) + "\n"
 			text += "last message:  " + "\n"
 			text += "  " + meme.lastMessage + "\n"
 			if meme.hasError {
@@ -149,7 +149,7 @@ func main() {
 		}
 		w, h := s.Size()
 		textMatrix := textToMatrix(text)
-		squished := squash(content, h-1, w/3*2)
+		squished := squash(content, h-1)
 		graph := printAsGraphSetX(squished, w/3*2)
 		newmatrix := combineMatrix(graph, 0, h-len(graph), textMatrix, w/3*2+1, 0)
 		writeToScreen(s, newmatrix)
@@ -297,9 +297,8 @@ func writeToScreen(s tcell.Screen, data [][]rune) {
 //sends message count for interval every n seconds
 func monitorMpm(interval int, h *monitorState, c chan<- []float64) {
 	output := make([]float64, 1)
-	output[0] = 0.000001
 	time.Sleep(time.Second * time.Duration(interval))
-	msgcount := 0.001 + float64(h.count)
+	msgcount := h.count
 	output[0] = msgcount
 	c <- output
 	for {
